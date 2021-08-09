@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Music App</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_playlist">Playlist</string>
+    <string name="recent_activity">Recent Activity</string>
+    <string name="recommended">Recommended</string>
+    <string name="trending">Trending</string>
+    <string name="your_library">Your Library</string>
+    <string name="switch_layout">switch layout</string>
+    <string name="recent">Recent</string>
+    <string name="playing_now">Playing now</string>
+    <string name="song_name">Song Name</string>
+    <string name="singer">Singer</string>
+    <string name="zero">0.00</string>
+</resources>
