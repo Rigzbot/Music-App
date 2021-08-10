@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/_111sdp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/songImageRVHome1"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            tools:src="@drawable/album_art_sample" />
+
+        <ImageView
+            android:id="@+id/songImageRVHome2"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_toEndOf="@id/songImageRVHome1"
+            tools:src="@drawable/album_art_sample" />
+
+        <ImageView
+            android:id="@+id/songImageRVHome3"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@id/songImageRVHome1"
+            tools:src="@drawable/album_art_sample" />
+
+        <ImageView
+            android:id="@+id/songImageRVHome4"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@id/songImageRVHome2"
+            android:layout_toEndOf="@id/songImageRVHome3"
+            tools:src="@drawable/album_art_sample" />
+
+        <TextView
+            android:id="@+id/playlistNameRVHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/songImageRVHome3"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/manrope_bold"
+            android:maxLines="1"
+            android:text="@string/title_playlist"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

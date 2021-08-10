@@ -33,12 +33,12 @@
         app:queryBackground="@null"
         app:queryHint="Artists, songs, or playlists" />
 
+    <!--    No margin top as recyclerView item has top margin-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
         android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchView" />
