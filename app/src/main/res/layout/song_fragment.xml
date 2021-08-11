@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/songFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_song"
     tools:context=".ui.song.SongFragment">
 
     <RelativeLayout
@@ -15,12 +15,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
+            android:id="@+id/backButtonSongFragment"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_arrow_back"
+            android:src="@drawable/ic_arrow_down"
             app:tint="@color/gray" />
 
         <ImageView
@@ -49,10 +49,10 @@
         android:layout_height="@dimen/_250sdp"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_30sdp"
+        android:src="@drawable/album_art_sample"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/songTitle"
-        tools:src="@drawable/album_art_sample" />
+        app:layout_constraintTop_toBottomOf="@id/songTitle" />
 
     <RelativeLayout
         android:id="@+id/songDetails"
@@ -96,58 +96,58 @@
         app:tint="@color/white" />
 
     <!--    change valueTo to length of song-->
-    <RelativeLayout
-        android:id="@+id/sliderLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/songDetails">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/slider"
-            android:layout_marginStart="-25dp"
-            android:layout_marginTop="@dimen/_23sdp"
-            android:fontFamily="@font/manrope_regular"
-            android:text="@string/zero"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp" />
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/slider"
+        <RelativeLayout
+            android:id="@+id/sliderLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:valueFrom="0.00"
-            android:valueTo="songLength"
-            app:thumbColor="@color/white"
-            app:thumbRadius="@dimen/_5sdp"
-            app:trackColor="@color/darkGray"
-            app:trackColorActive="@color/white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/songDetails">
 
-        <!--        Update end time-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/slider"
-            android:layout_marginTop="@dimen/_23sdp"
-            android:layout_marginEnd="-25dp"
-            android:fontFamily="@font/manrope_regular"
-            android:text="@string/zero"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/slider"
+                android:layout_marginStart="-25dp"
+                android:layout_marginTop="@dimen/_23sdp"
+                android:fontFamily="@font/manrope_regular"
+                android:text="@string/zero"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:valueFrom="0.00"
+                app:thumbColor="@color/white"
+                app:thumbRadius="@dimen/_5sdp"
+                app:trackColorActive="@color/white"
+                app:trackColorInactive="@color/darkGray" />
+
+            <!--        Update end time-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/slider"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_23sdp"
+                android:layout_marginEnd="25dp"
+                android:fontFamily="@font/manrope_regular"
+                android:text="@string/zero"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+        </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/songControlLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_30sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sliderLayout">
@@ -156,46 +156,46 @@
             android:id="@+id/shuffleButton"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_shuffle"
-            android:layout_centerInParent="true"
             android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_shuffle"
             app:tint="@color/gray" />
 
         <ImageView
             android:id="@+id/previousButton"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:layout_toStartOf="@id/pauseButton"
-            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_centerInParent="true"
-            app:tint="@color/white"
-            android:src="@drawable/ic_previous" />
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toStartOf="@id/pauseButton"
+            android:src="@drawable/ic_previous"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/pauseButton"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
-            app:tint="@color/white"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_pause" />
+            android:src="@drawable/ic_pause"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/nextButton"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            app:tint="@color/white"
-            android:layout_marginStart="@dimen/_10sdp"
             android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@id/pauseButton"
-            android:src="@drawable/ic_next" />
+            android:src="@drawable/ic_next"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/loopButton"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
             android:src="@drawable/ic_baseline_loop_24"
             app:tint="@color/gray" />
 

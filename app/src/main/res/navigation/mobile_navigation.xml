@@ -22,4 +22,10 @@
         android:name="com.example.musicapp.ui.playlist.PlaylistFragment"
         android:label="@string/title_playlist"
         tools:layout="@layout/fragment_playlist" />
+
+    <fragment
+        android:id="@+id/songFragment"
+        android:name="com.example.musicapp.ui.song.SongFragment"
+        android:label="song_fragment"
+        tools:layout="@layout/song_fragment" />
 </navigation>

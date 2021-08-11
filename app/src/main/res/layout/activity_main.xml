@@ -38,13 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/secondaryDarkColor"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintStart_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/arrowUp"
+            android:id="@+id/arrowUpBottomBar"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_alignParentStart="true"
@@ -80,7 +80,7 @@
             android:layout_width="@dimen/_180sdp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toEndOf="@id/arrowUp"
+            android:layout_toEndOf="@id/arrowUpBottomBar"
             android:ellipsize="marquee"
             android:fontFamily="@font/manrope_regular"
             android:marqueeRepeatLimit="marquee_forever"
