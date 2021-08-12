@@ -3,7 +3,9 @@ package com.example.musicapp.ui.song
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +18,15 @@ import androidx.palette.graphics.Palette
 import com.example.musicapp.R
 import com.example.musicapp.databinding.SongFragmentBinding
 import com.example.musicapp.ui.search.SearchViewModel
+import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.song_fragment.*
+import java.util.concurrent.TimeUnit
 
 class SongFragment : Fragment() {
+    //runnable object and handler to handle slider position
+    private lateinit var runnable: Runnable
+    private var handler = Handler()
 
     private lateinit var searchViewModel: SearchViewModel
     private var _binding: SongFragmentBinding? = null
@@ -36,8 +44,7 @@ class SongFragment : Fragment() {
             ViewModelProvider(this).get(SearchViewModel::class.java)
 
         _binding = SongFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +59,9 @@ class SongFragment : Fragment() {
         binding.backButtonSongFragment.setOnClickListener {
             findNavController().navigateUp() //remove last stack
         }
+
+        //media player, button, slider settings
+        createMediaPLayer()
     }
 
     //change background color of song view
@@ -83,6 +93,83 @@ class SongFragment : Fragment() {
                 //Set Gradient
                 binding.songFragmentLayout.background = gradientDrawable
             }
+        }
+    }
+
+    /**
+     * Media player implementation
+     */
+    private fun createMediaPLayer() {
+        val mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.music)
+
+        slider.valueFrom = 0.0F
+        //duration of song settings
+        var duration = mediaPlayer.duration // in milliseconds
+
+        //set value of song length
+        songLength.text = timeInMinutes(duration.toLong())
+
+        //+1000 to allow slider value to go back to zero upon completion
+        duration += 1000
+        slider.valueTo = duration.toFloat()
+
+        //pause button settings
+        pauseButton.setOnClickListener {
+            //check if media player is playing
+            if (!mediaPlayer.isPlaying) {
+                mediaPlayer.start()
+                pauseButton.setImageResource(R.drawable.ic_pause)
+            } else {
+                //if the media player is already running
+                mediaPlayer.pause()
+                pauseButton.setImageResource(R.drawable.ic_play)
+            }
+        }
+
+        //change song progress according to slider position
+        slider.addOnChangeListener(Slider.OnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                mediaPlayer.seekTo(value.toInt())
+
+                //set value of current text view
+                currentValueSong.text = timeInMinutes(value.toLong())
+            }
+        })
+
+        //change position of slider according to position of song
+        runnable = Runnable {
+            val current = mediaPlayer.currentPosition
+            slider.value = current.toFloat()
+            currentValueSong.text = timeInMinutes(current.toLong())
+
+            handler.postDelayed(runnable, 1000)
+        }
+        handler.postDelayed(runnable, 1000)
+
+        /**
+         * TO DO: set music player to play next song when current song finishes
+         */
+        mediaPlayer.setOnCompletionListener {
+            pauseButton.setImageResource(R.drawable.ic_play)
+            slider.value = 0.0F
+        }
+    }
+
+    private fun timeInMinutes(duration: Long): String {
+        return if (TimeUnit.MILLISECONDS.toMinutes(duration) <= 9) {
+            String.format(
+                "%01d: %02d",
+                TimeUnit.MILLISECONDS.toMinutes(duration),
+                TimeUnit.MILLISECONDS.toSeconds(duration) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+            )
+        } else {
+            String.format(
+                "%02d: %02d",
+                TimeUnit.MILLISECONDS.toMinutes(duration),
+                TimeUnit.MILLISECONDS.toSeconds(duration) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+            )
         }
     }
 

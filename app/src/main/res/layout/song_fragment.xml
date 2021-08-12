@@ -5,6 +5,7 @@
     android:id="@+id/songFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.song.SongFragment">
 
     <RelativeLayout
@@ -105,6 +106,7 @@
             app:layout_constraintTop_toBottomOf="@id/songDetails">
 
             <TextView
+                android:id="@+id/currentValueSong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/slider"
@@ -124,11 +126,13 @@
                 android:valueFrom="0.00"
                 app:thumbColor="@color/white"
                 app:thumbRadius="@dimen/_5sdp"
+                app:labelBehavior="gone"
                 app:trackColorActive="@color/white"
                 app:trackColorInactive="@color/darkGray" />
 
             <!--        Update end time-->
             <TextView
+                android:id="@+id/songLength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/slider"
@@ -176,8 +180,7 @@
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_pause"
+            android:src="@drawable/ic_play"
             app:tint="@color/white" />
 
         <ImageView
