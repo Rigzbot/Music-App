@@ -17,10 +17,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.palette.graphics.Palette
 import com.example.musicapp.R
 import com.example.musicapp.databinding.SongFragmentBinding
-import com.example.musicapp.ui.search.SearchViewModel
 import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.song_fragment.*
 import java.util.concurrent.TimeUnit
 
 class SongFragment : Fragment() {
@@ -28,22 +26,19 @@ class SongFragment : Fragment() {
     private lateinit var runnable: Runnable
     private var handler = Handler()
 
-    private lateinit var searchViewModel: SearchViewModel
-    private var _binding: SongFragmentBinding? = null
+    private lateinit var songViewModel: SongViewModel
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: SongFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        searchViewModel =
-            ViewModelProvider(this).get(SearchViewModel::class.java)
+        songViewModel =
+            ViewModelProvider(this).get(SongViewModel::class.java)
 
-        _binding = SongFragmentBinding.inflate(inflater, container, false)
+        binding = SongFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -102,45 +97,45 @@ class SongFragment : Fragment() {
     private fun createMediaPLayer() {
         val mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.music)
 
-        slider.valueFrom = 0.0F
+        binding.slider.valueFrom = 0.0F
         //duration of song settings
         var duration = mediaPlayer.duration // in milliseconds
 
         //set value of song length
-        songLength.text = timeInMinutes(duration.toLong())
+        binding.songLength.text = timeInMinutes(duration.toLong())
 
         //+1000 to allow slider value to go back to zero upon completion
         duration += 1000
-        slider.valueTo = duration.toFloat()
+        binding.slider.valueTo = duration.toFloat()
 
         //pause button settings
-        pauseButton.setOnClickListener {
+        binding.pauseButton.setOnClickListener {
             //check if media player is playing
             if (!mediaPlayer.isPlaying) {
                 mediaPlayer.start()
-                pauseButton.setImageResource(R.drawable.ic_pause)
+                binding.pauseButton.setImageResource(R.drawable.ic_pause)
             } else {
                 //if the media player is already running
                 mediaPlayer.pause()
-                pauseButton.setImageResource(R.drawable.ic_play)
+                binding.pauseButton.setImageResource(R.drawable.ic_play)
             }
         }
 
         //change song progress according to slider position
-        slider.addOnChangeListener(Slider.OnChangeListener { _, value, fromUser ->
+        binding.slider.addOnChangeListener(Slider.OnChangeListener { _, value, fromUser ->
             if (fromUser) {
                 mediaPlayer.seekTo(value.toInt())
 
                 //set value of current text view
-                currentValueSong.text = timeInMinutes(value.toLong())
+                binding.currentValueSong.text = timeInMinutes(value.toLong())
             }
         })
 
         //change position of slider according to position of song
         runnable = Runnable {
             val current = mediaPlayer.currentPosition
-            slider.value = current.toFloat()
-            currentValueSong.text = timeInMinutes(current.toLong())
+            binding.slider.value = current.toFloat()
+            binding.currentValueSong.text = timeInMinutes(current.toLong())
 
             handler.postDelayed(runnable, 1000)
         }
@@ -150,8 +145,8 @@ class SongFragment : Fragment() {
          * TO DO: set music player to play next song when current song finishes
          */
         mediaPlayer.setOnCompletionListener {
-            pauseButton.setImageResource(R.drawable.ic_play)
-            slider.value = 0.0F
+            binding.pauseButton.setImageResource(R.drawable.ic_play)
+            binding.slider.value = 0.0F
         }
     }
 
@@ -178,6 +173,5 @@ class SongFragment : Fragment() {
         super.onDestroyView()
         requireActivity().nav_view.visibility = View.VISIBLE
         requireActivity().currentSongBottomBar.visibility = View.VISIBLE
-        _binding = null
     }
 }
