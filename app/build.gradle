@@ -50,6 +50,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     //scalable unit text size
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -67,4 +68,17 @@ dependencies {
 
     //rounded image
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+
+    //exo player
+    implementation "com.google.android.exoplayer:exoplayer:2.15.0"
 }

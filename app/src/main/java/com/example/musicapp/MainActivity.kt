@@ -8,6 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicapp.databinding.ActivityMainBinding
 
+import android.content.Intent
+import com.example.musicapp.ui.song.SongActivity
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,12 +31,23 @@ class MainActivity : AppCompatActivity() {
 
         //up button navigates to songView when active
         binding.arrowUpBottomBar.setOnClickListener {
-            //to clear previous navigation history
-            navController.navigate(R.id.songFragment)
+            moveToNewActivity()
 
             //close menu and nav bar after going to music screen
             binding.currentSongBottomBar.visibility = View.GONE
             binding.navView.visibility = View.GONE
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        //open menu and nav bar after going to music screen
+        binding.currentSongBottomBar.visibility = View.VISIBLE
+        binding.navView.visibility = View.VISIBLE
+    }
+
+    private fun moveToNewActivity() {
+        val intent = Intent(this, SongActivity::class.java)
+        startActivity(intent)
     }
 }

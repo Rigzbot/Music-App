@@ -1,5 +1,6 @@
 package com.example.musicapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.musicapp.MusicApplication
 import com.example.musicapp.R
 import com.example.musicapp.databinding.FragmentHomeBinding
 import com.example.musicapp.ui.home.adapter.HomeSongAdapter
+import com.example.musicapp.ui.song.SongActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : Fragment() {
@@ -46,7 +48,7 @@ class HomeFragment : Fragment() {
 
         //setting up song adapter
         val songAdapter = HomeSongAdapter {
-            findNavController().navigate(R.id.action_navigation_home_to_songFragment)
+            moveToNewActivity()
         }
 
         //setting recent song recyclerView
@@ -57,6 +59,11 @@ class HomeFragment : Fragment() {
             }
         }
         binding.recentRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun moveToNewActivity() {
+        val intent = Intent(context, SongActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
